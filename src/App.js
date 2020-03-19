@@ -13,11 +13,16 @@ import {CartContext} from './contexts/CartContext'
 
 function App() {
 	const [products] = useState(data);
+	const [items] = useState(data);
 	const [cart, setCart] = useState([]);
 
 	const addItem = item => {
 		setCart([...cart, {item}])
 	};
+
+	const removeItem= item => {
+		setCart([...cart.filter({item})])
+	}
 
 	return (
 		<div className="App">
@@ -35,7 +40,7 @@ function App() {
 					</Route>
 
 					<Route path="/cart">
-						<ShoppingCart />
+						<ShoppingCart value={{products, removeItem}} />
 					</Route>
 				</CartContext.Provider>
 			</ProductContext.Provider>
